@@ -1,22 +1,23 @@
-
 # Arrays
+
+An array is an ordered list of element that has a number as position called index, arrays are mutable, can store any type of value the typeof is object
 
 ## There are five ways to create ana array:
 
 1. **Arrays literals**: manual creation
 
-2. **Array constructor**: you can create an empty array or an array with a length desired let a = new Array(10); give an sparse array with the length of 10.
+2. **Array constructor**: you can create an empty array or an array with a length desired `let a = new Array(10);` give an sparse array with the length of 10.
 
 3. **Array.of()**: allows you to create an array with a number value that not set the length of the array
 
-4. Array.from(arrayToCopy, functionToLoweCase): you can copy other array and as second parameter you can pas a function to copy the elements modified.
+4. **`Array.from(arrayToCopy, functionToLoweCase):`** you can copy other array and as second parameter you can pas a function to copy the elements modified.
 
-5. **Spread operator** [ . .  . arrayToCopy ]: you can copy an array and also you can insert the elements of one array inside of another array, also I can convert a string in a array
+5. **Spread operator** `[ . .  . arrayToCopy ]` you can copy an array and also you can insert the elements of one array inside of another array, also I can convert a string in a array
 
-  ```js
+```js
   let a  = [ 1, 2, . . . arrayToCopy, 4, 5];
   let b = [ . . . “Hello”] // results will be [ “H”, “e”, “l”, “l”, “o”];
-  ```
+```
 
 ## Using **Set()** with _**spread operator**_
 
@@ -34,7 +35,7 @@ can be used to know the index number on the array, count also the spaces in a sp
 let b = [ . . . “Hello”] // => [ “H”, “e”, “l”, “l”, “o”]
 b.length     // => the length is 5 
 b.length = 3 // deletes the index 3, 4.
-b.length = 0 // => [] returns an empty array
+b.length = 0 // => [] delete the elements of the array
 ```
 
 ## Adding and deleting arrays elements
@@ -81,6 +82,8 @@ b.length = 0 // => [] returns an empty array
   let bigFruit =  fruits.splice(4,1); // => melon
   // fruits final status 
   console.log(fruits); // ["banana", "fraise", "peach", "apple", "grapes"]
+  // delete all elements
+  fruit.splice(0); // => []
  ```
 
 - **slice** this method copy the elements desired in the array, uses two parameters, the first is the index where you want to start copying and the second the limiter index of the section you want to copy
@@ -122,7 +125,7 @@ Arrays like strings can use the same iterators could be a **for**-**for of**-**w
   // maintaining the array dense
   let denseArray = [];
   for (let element of nameLetters) {
-    if (element !== undefined) {
+    if (element !== undefined || element !== null) {
       denseArray.push(element);
     }
   }
@@ -153,7 +156,7 @@ console.log(table); // => 35
 ## Array methods
 
 - **The forEach() method**
-  forEach() The forEach() method iterates through an array, invoking a function you specify for each element. As we’ve described, you pass the function as the first argument to forEach(). forEach() then invokes your function with three arguments: the value of the array element, the index of the array element, and the array itself. If you only care about the value of the array element, you can write a function with only one parameter the additional arguments will be ignored:
+  The `forEach()` method iterates through an array, invoking a function you specify for each element. As described, you pass the function as the first argument to `forEach()`. `forEach()` then invokes your function with three arguments: the value of the array element, the index of the array element, and the array itself. If you only care about the value of the array element, you can write a function with only one parameter the additional arguments will be ignored:
 
 ```js
   let data = [1,2,3,4,5], sum = 0; // Compute the sum of the elements of the array 
@@ -162,7 +165,7 @@ console.log(table); // => 35
 ```
 
 - **The map() method**
-  The map() method passes each element of the array on which it is invoked to the function you specify and returns an array containing the values returned by your function. Note that map() returns a new array: it does not modify the array it is invoked on. If that array is sparse, your function will not be called for the missing elements, but the returned array will be sparse in the same way as the original array: it will have the same length and the same missing elements.
+  The `map()` method passes each element of the array on which it is invoked to the function you specify and returns an array containing the values returned by your function. Note that `map()` returns a new array: it does not modify the array it is invoked on. If that array is sparse, your function will not be called for the missing elements, but the returned array will be sparse in the same way as the original array: it will have the same length and the same missing elements. This method is very similar than `forEach()`.
 
 ```js
   let a = [1, 2, 3]; 
@@ -188,7 +191,7 @@ console.log(table); // => 35
   a.find(x => x % 7 === 0) // => undefined: no multiples of 7 in the array
 ```
 
-- **The findIndex() method** this method stop iterating the first time the predicate finds an element. When that happens,  returns the index of the element, if not matches fund find return -1
+- **The findIndex() method** this method stop iterating the first time the predicate finds an element. When that happens,  returns the index of the element, if not matches fund findIndex return -1
 
 ```js
   let a = [1,2,3,4,5];
@@ -218,7 +221,7 @@ console.log(table); // => 35
   a.reduce((x,y) => x+y, 0) // => 15; the sum of the values 
   a.reduce((x,y) => x*y, 1) // => 120; the product of the values 
   a.reduce((x,y) => (x > y) ? x : y) // => 5; the largest of the values
-  // reduceRight
+  // reduceRight makes the same as reduce but from right to left
   let stringToSplit = [...'andres']
   let stringReversed = stringToSplit.reduceRight((x,y) => x+=y); // => 'serdna'
 ```
@@ -238,7 +241,7 @@ In ES2019, the flat() method creates and returns a new array that contains the s
 
 ```
 
-The flatMap() method works just like the map() method (see “map()” on page 166) except that the returned array is automatically flattened as if passed to flat(). That is, calling a.flatMap(f) is the same as (but more efficient than) a.map(f).flat(): 
+The flatMap() method works just like the map() method (see “map()” on page 166) except that the returned array is automatically flattened as if passed to flat(). That is, calling a.flatMap(f) is the same as (but more efficient than) a.map(f).flat():
 
 ```js
   let phrases = ["hello world", "the definitive guide"]; 
