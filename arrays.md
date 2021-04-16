@@ -160,8 +160,14 @@ console.log(table); // => 35
 
 ```js
   let data = [1,2,3,4,5], sum = 0; // Compute the sum of the elements of the array 
-  data.forEach(value => { sum += value; }); // sum == 15 // Now increment each array element
+  data.forEach(value => { sum += value; }); 
+  console.log(sum); // sum = 15 // Now increment each array element
   data.forEach(function(v, i, a) { a[i] = v + 1; }); // data == [2,3,4,5,6]
+  // Reverse strings
+  let name = 'andres';
+  let reversedUpperCased = '';
+  [...name].reverse().forEach(letter => reversedUpperCased += letter.toUpperCase() );
+  console.log(reversedUpperCased); // => SERDNA
 ```
 
 - **The map() method**
