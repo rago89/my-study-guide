@@ -1,4 +1,6 @@
 # my-study-guide
 
-[Arrays](./arrays.md)
-[Functions](./functions.md)
+A summary guide to reviewing content
+
+1. [Arrays](./arrays.md)
+2. [Functions](./functions.md)
