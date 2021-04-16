@@ -156,7 +156,7 @@ console.log(table); // => 35
 ## Array methods
 
 - **The forEach() method**
-  The `forEach()` method iterates through an array, invoking a function you specify for each element. As described, you pass the function as the first argument to `forEach()`. `forEach()` then invokes your function with three arguments: the value of the array element, the index of the array element, and the array itself. If you only care about the value of the array element, you can write a function with only one parameter the additional arguments will be ignored:
+  The `forEach()` method iterates through an array, invoking a function you specify for each element. As described, you pass the function as the first argument to `forEach()`. `forEach()` then invokes your function with three arguments: the value of the array element, the index of the array element, and the array itself. If you only care about the value of the array element, you can write a function with only one parameter the additional arguments will be ignored, **the return value of `forEach` is undefined**
 
 ```js
   let data = [1,2,3,4,5], sum = 0; // Compute the sum of the elements of the array 
@@ -232,7 +232,7 @@ console.log(table); // => 35
   let stringReversed = stringToSplit.reduceRight((x,y) => x+=y); // => 'serdna'
 ```
 
-## Flattening arrays with flat() and flatMap() 
+## Flattening arrays with flat() and flatMap()
 
 In ES2019, the flat() method creates and returns a new array that contains the same elements as the array it is called on, except that any elements that are themselves arrays are “flattened” into the returned array. For example:
 
@@ -244,7 +244,6 @@ In ES2019, the flat() method creates and returns a new array that contains the s
   a.flat(2) // => [1, 2, 3, [4]] 
   a.flat(3) // => [1, 2, 3, 4] 
   a.flat(4) // => [1, 2, 3, 4]
-
 ```
 
 The flatMap() method works just like the map() method (see “map()” on page 166) except that the returned array is automatically flattened as if passed to flat(). That is, calling a.flatMap(f) is the same as (but more efficient than) a.map(f).flat():
@@ -280,12 +279,17 @@ The ES2016 includes() method takes a single argument and returns true if the arr
 ```
 
 - **sort()**
-  sorts the elements of an array in place and returns the sorted array. When sort() is called with no arguments, it sorts the array elements in alphabetical order (temporarily converting them to strings to perform the comparison, if necessary): 
+  sorts the elements of an array in place and returns the sorted array. When sort() is called with no arguments, it sorts the array elements in alphabetical order (temporarily converting them to strings to perform the comparison, if necessary), **this method does not create a new array sorted, it modify the array that call the method**
   
   ```js
   let a = ["banana", "cherry", "apple"]; 
-  a.sort(); // a == ["apple", "banana", "cherry"]
-  let a = [33, 4, 1111, 222]; a.sort(); // a == [1111, 222, 33, 4]; alphabetical order 
-  a.sort((a,b) => a-b);// a == [4, 33, 222, 1111]; numerical order
-  a.sort((a,b) => b-a); // a == [1111, 222, 33, 4]; reverse numerical order
+  a.sort(); 
+  console.log(a); // => ["apple", "banana", "cherry"]
+  let a = [33, 4, 1111, 222]; 
+  a.sort();
+  console.log(a); // => [1111, 222, 33, 4]; alphabetical order 
+  a.sort((a,b) => a-b); 
+  console.log(a); // => [4, 33, 222, 1111]; numerical order
+  a.sort((a,b) => b-a);
+  console.log(a); // => [1111, 222, 33, 4]; reverse numerical order
   ```
