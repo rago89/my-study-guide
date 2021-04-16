@@ -1,3 +1,4 @@
 # my-study-guide
 
-[Arrays](arrays.md)
+[Arrays](./arrays.md)
+[Functions](./functions.md)
