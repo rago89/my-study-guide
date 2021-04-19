@@ -5,7 +5,7 @@ Functions are fundamental building blocks, a function is a block of Js code that
 ## Types of functions
 
 1. **function declaration:**
-   are functions that are declared with the keyword `function`, this function have a keyword that is going to be the variable that is going to store the block of code, _function declarations are hoisted in the top os the script_
+   are functions that are declared with the keyword `function`, this function have a keyword that is going to be the variable that is going to store the block of code, function declarations are hoisted in the top os the script_
 
 ```js
   function addition(x, y){

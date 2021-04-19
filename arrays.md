@@ -1,6 +1,6 @@
 # Arrays
 
-An array is an ordered list of element that has a number as position called index, arrays are mutable, can store any type of value the typeof is object
+An array is an ordered list of elements that has a number as position called index, arrays are mutable, can store any type of value the typeof is object
 
 ## There are five ways to create ana array:
 
@@ -21,7 +21,7 @@ An array is an ordered list of element that has a number as position called inde
 
 ## Using **Set()** with _**spread operator**_
 
-I can filter an array without adding the prototype of the function **Set**
+I can search fo repeated elements in an array without adding the prototype of the function **Set**
   
 ```js
 let a = [ . . .new Set (b)]; // a is now [ “H”, “e”, “l”, “o”];
@@ -46,7 +46,7 @@ b.length = 0 // => [] delete the elements of the array
   let a = [...'Rafael']; // => ['R', 'a', 'f', 'a', 'e', 'l'] length of 6
   let arrayToPop = a.pop(); // => 'l';
   // a will be modified
-  console.log(a) // => ['R', 'a', 'f', 'a', 'e'] length of 5
+  console.log(a, a.length) // => ['R', 'a', 'f', 'a', 'e'] length of 5
 ```
 
 - **push** this method add one element at the end of the array is the same as assigning the value to a[a.length].
@@ -97,7 +97,7 @@ b.length = 0 // => [] delete the elements of the array
 ```js
   let pets = ['dog', 'cat', 'bird', 'apple', 'rabbit'];
   delete pets[3];
-  3 in pets // false, apple is not in the array
+  console.log(3 in pets);// false, apple is not in the array
   pets.length // => 4
 ```
 
@@ -175,14 +175,17 @@ console.log(table); // => 35
 
 ```js
   let a = [1, 2, 3]; 
-  a.map(x => x*x) // => [1, 4, 9]: the function takes input x and returns x*x
+  let  b = a.map(x => x*x) // => [1, 4, 9]: the function takes input x and returns x*x
+  console.log(b); // array mapped
+  console.log(a); // original array not modified
 ```
 
 - **The filter() method**
   If the return value is true, or a value that converts to true, then the element passed to the predicate is a member of the subset and is added to the array that will become the return value.
 
 ```js
-  let a = [5, 4, 3, 2, 1]; a.filter(x => x < 3) // => [2, 1]; values less than 3 
+  let a = [5, 4, 3, 2, 1]; 
+  a.filter(x => x < 3) // => [2, 1]; values less than 3 
   a.filter((x,i) => i % 2 === 0) // => [5, 3, 1]; every other value
   let dense = sparse.filter(() => true); //To close the gaps in a sparse array,
   a = a.filter(x => x !== undefined && x !== null); //close gaps and remove undefined and null elements 
@@ -208,7 +211,8 @@ console.log(table); // => 35
 - **The every() method** returns true only if all the conditions of the value are true
 
 ```js
-  let a = [1,2,3,4,5]; a.every(x => x < 10) // => true: all values are < 10. 
+  let a = [1,2,3,4,5]; 
+  a.every(x => x < 10) // => true: all values are < 10. 
   a.every(x => x % 2 === 0) // => false: not all values are even.
 ```
 
@@ -228,8 +232,8 @@ console.log(table); // => 35
   a.reduce((x,y) => x*y, 1) // => 120; the product of the values 
   a.reduce((x,y) => (x > y) ? x : y) // => 5; the largest of the values
   // reduceRight makes the same as reduce but from right to left
-  let stringToSplit = [...'andres']
-  let stringReversed = stringToSplit.reduceRight((x,y) => x+=y); // => 'serdna'
+  let stringReversed = [...'andres'].reduceRight((x,y) => x+=y);
+  console.log(stringReversed);  // => 'serdna'
 ```
 
 ## Flattening arrays with flat() and flatMap()
@@ -246,7 +250,7 @@ In ES2019, the flat() method creates and returns a new array that contains the s
   a.flat(4) // => [1, 2, 3, 4]
 ```
 
-The flatMap() method works just like the map() method (see “map()” on page 166) except that the returned array is automatically flattened as if passed to flat(). That is, calling a.flatMap(f) is the same as (but more efficient than) a.map(f).flat():
+The flatMap() method works just like the map() method (see “map()” except that the returned array is automatically flattened as if passed to flat(). That is, calling a.flatMap(f) is the same as (but more efficient than) a.map(f).flat():
 
 ```js
   let phrases = ["hello world", "the definitive guide"]; 
