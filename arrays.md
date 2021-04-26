@@ -6,25 +6,60 @@ An array is an ordered list of elements that has a number as position called ind
 
 1. **Arrays literals**: manual creation
 
-2. **Array constructor**: you can create an empty array or an array with a length desired `let a = new Array(10);` give an sparse array with the length of 10.
+2. **Array constructor**: you can create an empty array or an array with a length desired it's the same as creating an array literal
 
-3. **Array.of()**: allows you to create an array with a number value that not set the length of the array
+```js
+  const a = new Array(10); // creates an sparse array with the length of 10
+  const b = new Array('rafael', 'andres'); // the same as an array literal  
+  const c = new Array('garcia', 'perez'); //  another array literal 
+  const d = new Array( b , c ) //create nested arrays [['rafael', 'andres'],['garcia', 'perez']]
+  d[1][1] = 'ortega' // the array copy is referenced, it means that this modification also affect the original (side effects)
+```
 
-4. **`Array.from(arrayToCopy, functionToLoweCase):`** you can copy other array and as second parameter you can pas a function to copy the elements modified.
+3. **Array.of()**: almost the same as `new Array` but with the difference that allows you to create an array with a number value that not set the length of the array
+
+```JS
+  const a = Array.of(10); //=> [10];
+ ``` 
+
+4. **Array.from(arrayToCopy, x => x + x):** you can copy other array and as second parameter you can pas a function to copy the elements modified.
+
+```JS
+const a  = Array.from('rafael'); // works like the spread operator 
+const b = Array.from(a, v =>  v.toUpperCase()); 
+let c = b.join(''); // => RAFAEL
+console.log(b); //=> ["R", "A", "F", "A", "E", "L"]; works like map 
+console.log(a); //=> ["r", "a", "f", "a", "e", "l"]; do not make side effects
+
+// can filter repeated items wit `new Set`
+const d = new Set([...'andreeeeesss']); //=> [[a],[n],[d],[r],[e],[s]];
+const e = Array.from(d); //=> ["a", "n", "d", "r", "e", "s"];
+
+// Create an array based on a property of DOM Elements
+const images = document.getElementsByTagName('img');
+const sources = Array.from(images, image => image.src);
+const insecureSources = sources.filter(link => link.startsWith('http://'));
+```
 
 5. **Spread operator** `[ . .  . arrayToCopy ]` you can copy an array and also you can insert the elements of one array inside of another array, also I can convert a string in a array
 
 ```js
-  let a  = [ 1, 2, . . . arrayToCopy, 4, 5];
-  let b = [ . . . “Hello”] // results will be [ “H”, “e”, “l”, “l”, “o”];
+  // Concatenate 2 arrays
+  let a = [1, 2, 3];
+  let b = [4, 5, 6];
+  let c = [...a, ...b]; // no side effects
+  // insert arrays inside of another array
+  let d  = [ 1, 2, . . . arrayToCopy, 4, 5];
+  // can split strings 
+  let e = [ . . . “Hello”] // results will be [ “H”, “e”, “l”, “l”, “o”];
 ```
 
 ## Using **Set()** with _**spread operator**_
 
-I can search fo repeated elements in an array without adding the prototype of the function **Set**
+I can filter repeated elements in an array without adding the prototype of the function **Set**
   
 ```js
-let a = [ . . .new Set (b)]; // a is now [ “H”, “e”, “l”, “o”];
+let a = [ . . . new Set (b)]; // a is now [ “H”, “e”, “l”, “o”];
 ```
 
 ## The _length_ property of the array
@@ -83,7 +118,7 @@ b.length = 0 // => [] delete the elements of the array
   // fruits final status 
   console.log(fruits); // ["banana", "fraise", "peach", "apple", "grapes"]
   // delete all elements
-  fruit.splice(0); // => []
+  fruit.splice(2); // => ["banana", "fraise"]
  ```
 
 - **slice** this method copy the elements desired in the array, uses two parameters, the first is the index where you want to start copying and the second the limiter index of the section you want to copy
@@ -125,9 +160,20 @@ Arrays like strings can use the same iterators could be a **for**-**for of**-**w
   // maintaining the array dense
   let denseArray = [];
   for (let element of nameLetters) {
-    if (element !== undefined || element !== null) {
+    if (element !== undefined && element !== null) {
       denseArray.push(element);
     }
+  }
+
+  // with regular loop 
+
+  let denseArray = [];
+for (let i = 0; i < newArray.length; i++ ) {
+  if (newArray[i] === undefined || newArray[i] === null) {
+    continue
+    } else {
+      denseArray.push(newArray[i]);
+    }; 
   }
 
   // accessing with a regular loop
@@ -189,6 +235,11 @@ console.log(table); // => 35
   a.filter((x,i) => i % 2 === 0) // => [5, 3, 1]; every other value
   let dense = sparse.filter(() => true); //To close the gaps in a sparse array,
   a = a.filter(x => x !== undefined && x !== null); //close gaps and remove undefined and null elements 
+
+  let array = new Array(null, false, 12, '', NaN, 'hello', true);
+  let filteredArray = array.filter(x => Boolean(x) === true );
+  console.log('array filtered => ', filteredArray); // => [12, "hello", true]
+  console.log('original array => ', array); // => [null, false, 12, "", NaN, "hello", true]
 ```
 
 - **The find() method** this method stop iterating the first time the predicate finds an element. When that happens,  returns the matching element, if not matches fund
@@ -232,7 +283,7 @@ console.log(table); // => 35
   a.reduce((x,y) => x*y, 1) // => 120; the product of the values 
   a.reduce((x,y) => (x > y) ? x : y) // => 5; the largest of the values
   // reduceRight makes the same as reduce but from right to left
-  let stringReversed = [...'andres'].reduceRight((x,y) => x+=y);
+  let stringReversed = [...'andres'].reduceRight((x,y) => x + y);
   console.log(stringReversed);  // => 'serdna'
 ```
 
@@ -255,7 +306,9 @@ The flatMap() method works just like the map() method (see “map()” except th
 ```js
   let phrases = ["hello world", "the definitive guide"]; 
   let words = phrases.flatMap(phrase => phrase.split(" "));
-  words // => ["hello", "world", "the", "definitive", "guide"];
+  console.log(words); // => ["hello", "world", "the", "definitive", "guide"];
+  words.splice(words.indexOf('world'), 1, 'mundo'); //=> ["hello", "mundo", "the", "definitive", "guide"]
+  console.log('word changed => ', words);
 ```
 
 ## Array Searching and Sorting Methods
