@@ -54,7 +54,7 @@ Objects are passed by reference it means that if you modify the object is going 
 
 ## deleting properties
 
-To delete a property is use the delete keyword, if you try to delete an property that doesn't exist is no going to be ani error and also nothing is going to happen, when you delete a property of an object where it was created it will delete also in the prototype chain
+To delete a property is use the delete keyword, if you try to delete an property that doesn't exist is no going to be any error and also nothing is going to happen, when you delete a property of an object where it was created it will delete also in the prototype chain
 
 if you create a configurable property using globalThis it can delete the property, but trying to delete a variable declared with var that belongs to the global object is going to be false  
 
@@ -203,4 +203,35 @@ Method The valueOf() method is much like the toString() method, but it is called
   square.area() // => 100
   square["method With Spaces"](1) // => 2 
   square[METHOD_NAME](1) // => 3
+```
+
+## Object manipulation
+
+ * **Pushing entries in an array**
+
+```js 
+// with a for in loop
+let arr = [];
+
+for (let prop in obj) {
+   if (obj.hasOwnProperty(prop)) {
+      let innerObj = {};
+      innerObj[prop] = obj[prop];
+      arr.push(innerObj)
+   }
+}
+
+// using a for of loop
+
+for (const [key , value] of Object.entries(obj)) {
+   if (obj.hasOwnProperty(key)) {
+      let innerObj = {};
+      innerObj[key] = value;
+      arr.push(innerObj)
+   }
+}
+    
+console.log(arr);
+
+// es6 shorthand
 

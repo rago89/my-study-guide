@@ -299,6 +299,9 @@ In ES2019, the flat() method creates and returns a new array that contains the s
   a.flat(2) // => [1, 2, 3, [4]] 
   a.flat(3) // => [1, 2, 3, 4] 
   a.flat(4) // => [1, 2, 3, 4]
+  /*------------------------------------------------*/
+  let b = [1, [2, [3, [4]]]]; 
+  console.log(a.flat(Infinity)); // => [1, 2, 3, 4];
 ```
 
 The flatMap() method works just like the map() method (see “map()” except that the returned array is automatically flattened as if passed to flat(). That is, calling a.flatMap(f) is the same as (but more efficient than) a.map(f).flat():
